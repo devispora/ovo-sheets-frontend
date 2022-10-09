@@ -49,6 +49,9 @@ export function OvOStaffForm() {
         if (desiredEmails > 1) {
             let amount = desiredEmails - 1;
             setAmountOfEmails(amount);
+            if(amount < 8){
+                disableAdd(false);
+            }
             if(amount < 2){
                 disableRemove(true);
             }
