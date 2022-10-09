@@ -5,7 +5,6 @@ import { Button, Form } from "react-bootstrap";
 
 
 function DropFormGroup(groupNumber: number) {
-    console.log(groupNumber);
     let groupName = `thatName${groupNumber}` ;
     let emailName = `Enter Email #${groupNumber +1}`
     if(groupNumber > 0){
@@ -34,7 +33,6 @@ export function OvOStaffForm() {
         emailFormEntries.push(DropFormGroup(i))
     }
     const onEmailAddClick = () => {
-        console.log(desiredEmails);
         if (desiredEmails < 8) {
             let amount = desiredEmails + 1;
             if( amount == 8){
@@ -48,11 +46,9 @@ export function OvOStaffForm() {
         }
     }
     const onEmailRemoveClick = () => {
-        console.log(desiredEmails);
         if (desiredEmails > 1) {
             let amount = desiredEmails - 1;
             setAmountOfEmails(amount);
-            console.log(amount);
             if(amount < 2){
                 disableRemove(true);
             }
