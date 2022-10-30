@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { MouseEventHandler, useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 
-export function DropEmailOptions(groupNumber: number) {
+export function EmailFormEntries(groupNumber: number) {
     let groupName = `thatName${groupNumber}`;
     let emailName = `Enter Email #${groupNumber + 1}`
     return (
@@ -12,18 +12,12 @@ export function DropEmailOptions(groupNumber: number) {
     )
 }
 
-
-export function EmailFormGroup( 
+function onEmailAddClick(
     desiredEmails: number,
-    setAmountOfEmails: Function){
-    const [disableRemoveButton, disableRemove] = useState(true);
-    const [disableAddButton, disableAdd] = useState(false);
-    const emailFormEntries = [];
-    for (let i = 0; i < desiredEmails; i++) {
-        emailFormEntries.push(DropEmailOptions(i))
-    }
-
-    const onEmailAddClick = () => {
+    disableRemove: Function,
+    disableAdd: Function,
+    setAmountOfEmails: Function) {
+    return () => {
         if (desiredEmails < 8) {
             let amount = desiredEmails + 1;
             if (amount === 8) {
@@ -35,7 +29,14 @@ export function EmailFormGroup(
             }
         }
     }
-    const onEmailRemoveClick = () => {
+}
+
+function onEmailRemoveClick(
+    desiredEmails: number,
+    disableRemove: Function,
+    disableAdd: Function,
+    setAmountOfEmails: Function) {
+    return () => {
         if (desiredEmails > 1) {
             let amount = desiredEmails - 1;
             setAmountOfEmails(amount);
@@ -47,11 +48,33 @@ export function EmailFormGroup(
             }
         }
     }
+}
+
+
+function EmailAlterOptions(
+    desiredEmails: number,
+    setAmountOfEmails: Function
+) {
+    const [disableRemoveButton, disableRemove] = useState(true);
+    const [disableAddButton, disableAdd] = useState(false);
     return (
-    
-    (<Form.Group className="mb-3">
-        <Button variant="success" value="addButton" onClick={onEmailAddClick} disabled={disableAddButton}>+ Email</Button>
-        <Button variant="danger" value="removeButton" onClick={onEmailRemoveClick} disabled={disableRemoveButton}>- Email</Button>
-    </Form.Group>)
+        <Form.Group className="mb-3">
+            <Button variant="success" value="addButton" onClick={onEmailAddClick(desiredEmails, disableRemove, disableAdd, setAmountOfEmails)} disabled={disableAddButton}>+ Email</Button>
+            <Button variant="danger" value="removeButton" onClick={onEmailRemoveClick(desiredEmails, disableRemove, disableAdd, setAmountOfEmails)} disabled={disableRemoveButton}>- Email</Button>
+        </Form.Group>
     )
+}
+
+
+export function EmailFormGroup(
+    desiredEmails: number,
+    setAmountOfEmails: Function) {
+
+    const emailFormEntries = [];
+    for (let i = 0; i < desiredEmails; i++) {
+        emailFormEntries.push(EmailFormEntries(i))
+    }
+    emailFormEntries.push(EmailAlterOptions(desiredEmails, setAmountOfEmails))
+
+    return emailFormEntries;
 }

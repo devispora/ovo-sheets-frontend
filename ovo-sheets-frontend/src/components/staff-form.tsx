@@ -3,29 +3,25 @@ import { Button, Form, InputGroup } from "react-bootstrap";
 import { DropDayOption } from "./date/day-dropdown";
 import { DropMonthOption } from "./date/month-dropdown";
 import { DropYearOption } from "./date/year-dropdown";
-import { DropEmailOptions, EmailFormGroup } from "./email/email-dropdown";
+import { EmailFormEntries, EmailFormGroup } from "./email/email-dropdown";
 import { DropAccountStatus, DropReservationType } from "./reservation/reservation-details";
 import { DropHourOption, DropMinuteOption } from "./time/time-dropdowns";
 
 
 export function OvOStaffForm() {
     const currentDate = new Date();
-    const currentMonth = currentDate.getUTCMonth();
-    const currentDay = currentDate.getDate();
-
     const [desiredEmails, setAmountOfEmails] = useState(1);
-    const [startingMonth, adjustStartingMonth] = useState(currentMonth);
-    const [refMonth, adjustRefMonth] = useState(currentMonth);
-    const [startingDay, adjustStartingDay] = useState(currentDay);
+    const [startingMonth, adjustStartingMonth] = useState(currentDate.getUTCMonth());
+    const [refMonth, adjustRefMonth] = useState(currentDate.getUTCMonth());
+    const [startingDay, adjustStartingDay] = useState(currentDate.getDate());
 
     const emailFormEntries = [];
     for (let i = 0; i < desiredEmails; i++) {
-        emailFormEntries.push(DropEmailOptions(i))
+        emailFormEntries.push(EmailFormEntries(i))
     }
 
     return (
         <Form>
-            {emailFormEntries}
             {EmailFormGroup(desiredEmails, setAmountOfEmails)}
             <Form.Group className="input-group mb-3" controlId="formDateTime">
                 <InputGroup.Text>Year</InputGroup.Text>
