@@ -5,8 +5,6 @@ import { DropMonthOption } from "./month-dropdown";
 import { DropYearOption } from "./year-dropdown";
 
 
-
-
 export function DateFormGroup() {
     const currentDate = new Date();
     const [startingMonth, adjustStartingMonth] = useState(currentDate.getUTCMonth());

@@ -31,9 +31,6 @@ function determineMonths(startingMonth: number) {
     return options;
 }
 
-
-
-
 export function DropMonthOption(
     currentDate: Date,
     startingMonth: number,
@@ -65,4 +62,5 @@ export function useMonthChange(
             }
         }
     }
-}    
+}
+

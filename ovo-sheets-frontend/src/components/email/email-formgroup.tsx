@@ -1,4 +1,4 @@
-import { MouseEventHandler, useState } from "react";
+import { useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 
 
@@ -12,7 +12,6 @@ export function EmailFormGroup() {
 
     return emailFormEntries;
 }
-
 
 export function EmailFormEntries(groupNumber: number) {
     let groupName = `thatName${groupNumber}`;

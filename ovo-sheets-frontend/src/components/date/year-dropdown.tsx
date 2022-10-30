@@ -2,8 +2,8 @@ import { ChangeEvent, ChangeEventHandler } from "react";
 import { Form } from "react-bootstrap";
 
 
-
-export function DropYearOption(currentDate: Date,
+export function DropYearOption(
+    currentDate: Date,
     adjustStartingMonth: Function,
     adjustRefMonth: Function,
     adjustStartingDay: Function) {

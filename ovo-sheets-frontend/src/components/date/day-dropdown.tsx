@@ -1,7 +1,6 @@
 import { Form } from "react-bootstrap";
 
 
-
 export function DropDayOption(currentDate: Date, currentDay: number, refMonth: number) {
     let referenceMonth: Number;
     if (currentDate.getMonth() !== refMonth) {

@@ -1,7 +1,6 @@
 import { Form } from "react-bootstrap"
 
 
-
 export function DropReservationType() {
     return (
         <Form.Select aria-label='Default select example'>
