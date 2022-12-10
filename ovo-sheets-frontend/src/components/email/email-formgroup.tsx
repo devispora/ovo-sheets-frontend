@@ -31,7 +31,7 @@ function EmailAlterOptions(
     const [disableRemoveButton, disableRemove] = useState(true);
     const [disableAddButton, disableAdd] = useState(false);
     return (
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3" key="keyForExtraEmails">
             <Button variant="success" value="addButton" onClick={onEmailAddClick(desiredEmails, disableRemove, disableAdd, setAmountOfEmails)} disabled={disableAddButton}>+ Email</Button>
             <Button variant="danger" value="removeButton" onClick={onEmailRemoveClick(desiredEmails, disableRemove, disableAdd, setAmountOfEmails)} disabled={disableRemoveButton}>- Email</Button>
         </Form.Group>
