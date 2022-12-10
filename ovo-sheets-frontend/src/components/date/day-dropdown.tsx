@@ -1,8 +1,12 @@
+import { ChangeEventHandler, useEffect } from "react";
 import { Form } from "react-bootstrap";
+import { applyFormInputToState } from "../submissions/submit-processor";
 
 
-export function DropDayOption(currentDate: Date, currentDay: number, refMonth: number) {
+export function DropDayOption(currentDate: Date, currentDay: number, refMonth: number, submitDay: Function) {
     let referenceMonth: Number;
+    const handleSelectChange: ChangeEventHandler = applyFormInputToState(submitDay);
+    useEffect(() => submitDay(currentDay), []);
     if (currentDate.getMonth() !== refMonth) {
         referenceMonth = refMonth;
     } else {
@@ -15,7 +19,7 @@ export function DropDayOption(currentDate: Date, currentDay: number, refMonth: n
         days.push(<option key={'day_' + day} value={day}>{day}</option>)
     }
     return (
-        <Form.Select defaultValue={currentDay} aria-label='Default select example'>
+        <Form.Select defaultValue={currentDay} aria-label='Default select example' onChange={handleSelectChange}>
             {days}
         </Form.Select>
     )

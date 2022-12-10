@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 
+//todo complicated bit of syncing the emails in submitemails all the time
 
-export function EmailFormGroup() {
+export function EmailFormGroup(submitEmails: Function) {
     const [desiredEmails, setAmountOfEmails] = useState(1);
     const emailFormEntries = [];
     for (let i = 0; i < desiredEmails; i++) {

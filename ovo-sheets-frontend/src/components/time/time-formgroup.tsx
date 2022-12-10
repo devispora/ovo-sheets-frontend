@@ -2,13 +2,13 @@ import { Form, InputGroup } from "react-bootstrap";
 import { DropHourOption, DropMinuteOption } from "./time-dropdowns";
 
 
-export function TimeFormGroup() {
+export function TimeFormGroup(submitHour: Function, submitMinutes: Function) {
     return (
         <Form.Group className="input-group mb-3" controlId="formHour">
             <InputGroup.Text>Hour</InputGroup.Text>
-            {DropHourOption()}
+            {DropHourOption(submitHour)}
             <InputGroup.Text>Minutes</InputGroup.Text>
-            {DropMinuteOption()}
+            {DropMinuteOption(submitMinutes)}
         </Form.Group>
     )
 }

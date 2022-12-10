@@ -1,5 +1,6 @@
-import { ChangeEvent, ChangeEventHandler } from "react";
+import { ChangeEvent, ChangeEventHandler, useEffect } from "react";
 import { Form } from "react-bootstrap";
+import { applyFormInputToState } from "../submissions/submit-processor";
 
 
 function MonthOptions() {
@@ -35,10 +36,14 @@ export function DropMonthOption(
     currentDate: Date,
     startingMonth: number,
     adjustStartingDay: Function,
-    adjustRefMonth: Function) {
-    const monthFunctionTrigger: ChangeEventHandler = useMonthChange(currentDate, adjustStartingDay, adjustRefMonth);
+    adjustRefMonth: Function,    
+    submitMonth: Function,
+    submitDay: Function
+    ) {
+    const monthFunctionTrigger: ChangeEventHandler = useMonthChange(currentDate, adjustStartingDay, adjustRefMonth, submitMonth, submitDay);
+    useEffect(() => submitMonth(startingMonth), []);
     return (
-        <Form.Select defaultValue={startingMonth} onChange={monthFunctionTrigger} aria-label='Default select example'>
+        <Form.Select onChange={monthFunctionTrigger} aria-label='Default select example'>
             {determineMonths(startingMonth)}
         </Form.Select>
     )
@@ -47,18 +52,21 @@ export function DropMonthOption(
 export function useMonthChange(
     currentDate: Date,
     adjustStartingDay: Function,
-    adjustRefMonth: Function): ChangeEventHandler {
+    adjustRefMonth: Function,
+    submitMonth: Function,
+    submitDay: Function): ChangeEventHandler{
     return (event: ChangeEvent<HTMLInputElement>) => {
         if ('target' in event) {
             let target = event.target
             if ('value' in target) {
                 if (Number(target.value) !== currentDate.getUTCMonth()) {
                     adjustStartingDay(1);
-                    adjustRefMonth(target.value);
+                    submitDay(1);
                 } else {
                     adjustStartingDay(currentDate.getDate());
-                    adjustRefMonth(target.value);
                 }
+                adjustRefMonth(target.value);
+                submitMonth(target.value);
             }
         }
     }
