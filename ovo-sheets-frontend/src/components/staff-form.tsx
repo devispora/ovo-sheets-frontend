@@ -7,15 +7,11 @@ import { TimeFormGroup } from "./time/time-formgroup";
 import { useState } from 'react';
 import { AccountStatus, ReservationType } from "../models/staff-form-submission";
 
-// Statewrapper
-
-
-
 
 export function OvOStaffForm() {
 
     const [submittedGroupNames, submitGroupNames] = useState('');
-    const [submittedEmails, submitEmails] = useState([]);
+    const [submittedEmails, submitEmails] = useState(new Set<string>());
     const [submittedReservationType, submitReservationType] = useState(ReservationType.BASIC_JAEGER_ACCOUNTS);
     const [submittedAccountStatus, submitAccountStatus] = useState(AccountStatus.NOT_READY);
     const [submittedYear, submitYear] = useState(0);
@@ -39,12 +35,13 @@ export function OvOStaffForm() {
         console.log(submittedDay);
         console.log(submittedMonth);
         console.log(submittedYear);
+        console.log(submittedEmails);
     }
 
     return (
         <Form onSubmit={handleSubmit}>
             {GroupName(submitGroupNames)}
-            {EmailFormGroup(submitEmails)}
+            {EmailFormGroup(submittedEmails, submitEmails)}
             {DateFormGroup(submitYear, submitMonth, submitDay)}
             {TimeFormGroup(submitHour, submitMinutes)}
             <Form.Group className="input-group mb-3">
